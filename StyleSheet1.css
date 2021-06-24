@@ -1,6 +1,6 @@
 html, body {
     height: 100%;
-    background-color: forestgreen;
+    background-color: darkgoldenrod;
     overflow:hidden;
 }
 
@@ -48,7 +48,7 @@ body {
     and (min-width: 150px) and (max-width: 600px){
     #content{
         margin: 0 auto;
-        width: 70%;
+        zoo 85%;
         clear: both;
     }
 }
