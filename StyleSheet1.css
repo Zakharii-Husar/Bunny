@@ -1,0 +1,38 @@
+﻿html, body {
+    height: 100%;
+    background-color: burlywood;
+    overflow:hidden;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.text {
+    font-weight: bold;
+    font-size: 30px;
+    margin: initial;
+    background-color: cadetblue;
+    border: 3px solid blue;
+}
+
+#grid {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 59px repeat(3, 1fr);
+    border: 3px solid black;
+    
+}
+
+    #grid * {
+        max-width: 100%;
+        border: 3px solid blue;
+    }
