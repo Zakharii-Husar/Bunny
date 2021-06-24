@@ -42,3 +42,13 @@ body {
     padding: 10%;
 
 }
+
+
+@media only screen 
+    and (min-width: 150px) and (max-width: 600px){
+    #content{
+        margin: 0 auto;
+        width: 70%;
+        clear: both;
+    }
+}
