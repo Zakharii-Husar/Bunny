@@ -1,6 +1,6 @@
-﻿html, body {
+html, body {
     height: 100%;
-    background-color: burlywood;
+    background-color: forestgreen;
     overflow:hidden;
 }
 
@@ -16,8 +16,8 @@ body {
 
 .text {
     font-weight: bold;
-    font-size: 30px;
-    margin: initial;
+    color: cadetblue;
+    text-shadow: 2px 2px 3px black;
     background-color: cadetblue;
     border: 3px solid blue;
 }
@@ -33,6 +33,12 @@ body {
 }
 
     #grid * {
-        max-width: 100%;
         border: 3px solid blue;
     }
+
+#score, #level {
+    font-size: 25px;
+    margin: inherit;
+    padding: 10%;
+
+}
