@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', () => {
 let barrel = function () {
     let user = 0;
     let lives = 3;
@@ -135,3 +136,4 @@ let barrel = function () {
 let button = document.getElementById("hearts");
 button.addEventListener("click", barrel);
 button.addEventListener("click", (function () { button.disabled = true; }));
+});
