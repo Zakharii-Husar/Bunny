@@ -8,7 +8,7 @@ let barrel = function () {
     let defaultSpeed = 2500;
     let hitSpeed = 2200;
 
-    // GENERATES RANDOM NUMBER EVERY NTH SECOND
+    // GENERATES RANDOM NUMBER EVERY NTH SECON
     const generator = setInterval(function () {
         // SETS DEFAULT HOLES AFTER RESTART AND DEFAULT SELECTOR COLLOR
         for (i = 1; i < 10; i++) {
