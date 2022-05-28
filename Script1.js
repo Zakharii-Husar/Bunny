@@ -1,20 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     const theGame = () => {
+        STARTBUTTON.removeEventListener("click", theGame)
         const properties = {
             userInput: 0,
             computerInput: 1,
             lives: 3,
             score: 0,
             level: 1,
-            gameSpeed: 3000,
-            resetSpeed: 2200,
+            showBunnySpeed: 3000,
+            hideBunnySpeed: 2200,
             clearIntervalStamp: null
         }
 
         const displayState = () => {
             const scoreDisplay = document.getElementById("score");
             const levelDisplay = document.getElementById("level");
-            const heart = document.getElementById("hearts");
+            const livesDisplay = document.getElementById("hearts");
 
             scoreDisplay.textContent = "SCORE: " + properties.score;
             levelDisplay.textContent = `LEVEL: ${properties.level}/3`;
@@ -22,16 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
             levelDisplay.style.background = "white";
             scoreDisplay.style.color = "red";
             levelDisplay.style.color = "red";
-            heart.setAttribute("src", `img/${properties.lives}.jpg`)
-        }
+            livesDisplay.setAttribute("src", `img/${properties.lives}.jpg`)
+        };
+        displayState()
 
         const resetGrid = () => {
-            for (i = 1; i < 10; i++) {
+            properties.userInput = 0;
+            for (let i = 1; i < 10; i++) {
                 document.getElementById(i).setAttribute("src", "img/default.gif");
                 document.getElementById(i).style.border = "3px solid blue";
             };
-            properties.userInput = 0;
-            document.getElementById(properties.computerInput).setAttribute("src", "img/default.gif")
         };
 
         const listenToUserInput = () => {
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const generateComputerInput = () => {
             properties.computerInput = (Math.floor((Math.random() * 9) + 1));
-            document.getElementById(properties.computerInput).setAttribute("src", "img/slow.gif");
+            document.getElementById(properties.computerInput).setAttribute("src", `img/speed${properties.level}.gif`);
         };
 
         const checkMatch = () => {
@@ -58,49 +59,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     properties.lives -= 1;
                     document.getElementById(properties.computerInput).setAttribute("src", "img/miss.gif");
                 };
-            }, properties.resetSpeed);
+            }, properties.hideBunnySpeed);
         };
 
         const gameOver = () => {
             if (properties.lives === 0) {
-                (function () { startBtn.disabled = false; }())
-                for (i = 1; i < 10; i++) {
+                STARTBUTTON.addEventListener("click",  theGame);
+                for (let i = 1; i < 10; i++) {
                     document.getElementById(i).setAttribute("src", `img/L${i}.jpg`);
                 };
                 properties.lives = 3;
                 properties.score = 0;
                 properties.level = 1;
-                properties.gameSpeed = 3000;
-                properties.resetSpeed = 2200;
-                startBtn.setAttribute("src", "img/restart.png");
+                properties.showBunnySpeed = 3000;
+                properties.hideBunnySpeed = 2200;
+                STARTBUTTON.setAttribute("src", "img/restart.png");
                 clearInterval(generator);
                 clearInterval(properties.clearIntervalStamp);
             }
         };
 
         const levelUp = () => {
-            if (properties.score >= 10 && properties.score < 20) {
+            if (properties.score > 9) {
                 properties.level = 2;
-                properties.gameSpeed = 1800;
-                properties.resetSpeed = 1000;
-                document.getElementById(properties.computerInput).setAttribute("src", "img/medium.gif");
+                properties.showBunnySpeed = 1800;
+                properties.hideBunnySpeed = 1000;
+                return
             }
-            else if (properties.score >= 20) {
+            if (properties.score > 19) {
                 properties.level = 3;
-                properties.gameSpeed = 1375;
-                properties.resetSpeed = 575;
-                document.getElementById(properties.computerInput).setAttribute("src", "img/fast.gif");
+                properties.showBunnySpeed = 1375;
+                properties.hideBunnySpeed = 575;
             };
         };
 
         const won = () => {
             if (properties.score === 30) {
                 clearInterval(generator);
-                setTimeout(function () {
-                    for (i = 1; i < 10; i++) {
-                        document.getElementById(i).setAttribute("src", `img/W${i}.jpg`);
-                    };
-                }, 2600);
+                for (let i = 1; i < 10; i++) {
+                    document.getElementById(i).setAttribute("src", `img/W${i}.jpg`);
+                };
             };
         }
 
@@ -113,14 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
             levelUp();
             gameOver();
             won();
-        }, properties.gameSpeed);
+        }, properties.showBunnySpeed);
 
 
     };
 
 
 
-    let startBtn = document.getElementById("hearts");
-    startBtn.addEventListener("click", theGame);
-    startBtn.addEventListener("click", (function () { startBtn.disabled = true; }));
+    const STARTBUTTON = document.getElementById("hearts");
+    STARTBUTTON.addEventListener("click",  theGame);
 });
